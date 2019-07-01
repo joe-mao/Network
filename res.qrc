@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>connect/actExit.PNG</file>
+        <file>connect/clearTextEdit.PNG</file>
+        <file>connect/connectToServer.PNG</file>
+        <file>connect/disconnect.PNG</file>
+        <file>connect/startListening.PNG</file>
+        <file>connect/stopListening.PNG</file>
+    </qresource>
+</RCC>

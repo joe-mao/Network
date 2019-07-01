@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1040</width>
-    <height>653</height>
+    <width>1321</width>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -92,7 +92,7 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>770</x>
       <y>10</y>
       <width>541</width>
       <height>151</height>
@@ -131,12 +131,182 @@
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>300</y>
-      <width>651</width>
+      <x>10</x>
+      <y>170</y>
+      <width>1301</width>
       <height>211</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>641</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>TCP Server</string>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>监 听 地 址:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>31</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>监 听 端 口:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboIPTCPServer">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBoxServer">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>999999</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="editMsgServer">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>451</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSendServer">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>90</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发送消息</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>400</y>
+      <width>651</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>TCP Client</string>
+    </property>
+    <widget class="QComboBox" name="comboIPTCPClient">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>服务器地址:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBoxClient">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>999999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>31</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>端      口:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSendClient">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>90</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发送消息</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="editMsgClient">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>451</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -144,22 +314,105 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1040</width>
+     <width>1321</width>
      <height>23</height>
     </rect>
    </property>
   </widget>
   <widget class="QToolBar" name="Network">
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actStartListening"/>
+   <addaction name="actStopListening"/>
+   <addaction name="actClearPlainText"/>
+   <addaction name="actConnectToServer"/>
+   <addaction name="actDisconnectFromServer"/>
+   <addaction name="actExit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actStartListening">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/startListening.PNG</normaloff>:/image/connect/startListening.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>开始监听</string>
+   </property>
+   <property name="toolTip">
+    <string>开启服务器端的监听</string>
+   </property>
+  </action>
+  <action name="actStopListening">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/stopListening.PNG</normaloff>:/image/connect/stopListening.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>停止监听</string>
+   </property>
+   <property name="toolTip">
+    <string>关闭服务器端监听</string>
+   </property>
+  </action>
+  <action name="actClearPlainText">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/clearTextEdit.PNG</normaloff>:/image/connect/clearTextEdit.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>清空文本框</string>
+   </property>
+   <property name="toolTip">
+    <string>清空文本框</string>
+   </property>
+  </action>
+  <action name="actExit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/actExit.PNG</normaloff>:/image/connect/actExit.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="toolTip">
+    <string>退出程序</string>
+   </property>
+  </action>
+  <action name="actConnectToServer">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/connectToServer.PNG</normaloff>:/image/connect/connectToServer.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>连接到服务器</string>
+   </property>
+   <property name="toolTip">
+    <string>连接到服务器</string>
+   </property>
+  </action>
+  <action name="actDisconnectFromServer">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/disconnect.PNG</normaloff>:/image/connect/disconnect.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>断开连接</string>
+   </property>
+   <property name="toolTip">
+    <string>从服务器断开连接</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

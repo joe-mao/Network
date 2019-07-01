@@ -29,6 +29,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tcpClient, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(onSocketStateChangeClient(QAbstractSocket::SocketState)));
     connect(tcpClient, SIGNAL(readyRead()), this, SLOT(onSocketReadyReadClient()));
 
+    LabSocketStateUDP = new QLabel("Socket状态: ");
+    LabSocketStateUDP->setMinimumWidth(200);
+
+    udpSocket = new QUdpSocket(this);
+    connect(udpSocket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(onSocketStateChange(QAbstractSocket::SocketState)));
+    onSocketStateChange(udpSocket->state());
+    connect(udpSocket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 }
 
 MainWindow::~MainWindow()
@@ -65,6 +72,7 @@ QString MainWindow::getLocalIP()
                 localIP = aHost.toString();
                 this->ui->comboIPTCPServer->addItem(localIP);
                 this->ui->comboIPTCPClient->addItem(localIP);
+                this->ui->comboIPUDP->addItem(localIP);
                // break;
          //   }
         }
@@ -101,8 +109,6 @@ void MainWindow::on_btn_fromNameArgQString_clicked()
                 this->ui->plainTextEdit->appendPlainText("本机IP地址:" + aHost.toString());
                 this->ui->plainTextEdit->appendPlainText("-----------------------------------");
             }
-
-
         }
     }
 }
@@ -280,6 +286,41 @@ void MainWindow::onSocketReadyReadClient()
     }
 }
 
+void MainWindow::onSocketStateChangeUdp(QAbstractSocket::SocketState socketState)
+{
+    //socket状态变化时
+    switch (socketState) {
+        case QAbstractSocket::UnconnectedState:
+            LabSocketStateUDP->setText("socket状态: UnconnectedState"); break;
+        case QAbstractSocket::HostLookupState:
+            LabSocketStateUDP->setText("socket状态: HostLookupState"); break;
+        case QAbstractSocket::ConnectingState:
+            LabSocketStateUDP->setText("socket状态: ConnectingState"); break;
+        case QAbstractSocket::BoundState:
+            LabSocketStateUDP->setText("socket状态: BoundState"); break;
+        case QAbstractSocket::ClosingState:
+            LabSocketStateUDP->setText("socket状态: ClosingState"); break;
+        case QAbstractSocket::ConnectedState:
+            LabSocketStateUDP->setText("socket状态: ConnectedState"); break;
+        case QAbstractSocket::ListeningState:
+            LabSocketStateUDP->setText("socket 状态: ListeningState");
+    }
+}
+
+void MainWindow::onSocketReadyReadUdp()
+{
+    while(udpSocket->hasPendingDatagrams()){
+        QByteArray datagram;
+        datagram.resize(udpSocket->pendingDatagramSize());
+        QHostAddress peerAddress;
+        quint16 peerPort;
+        udpSocket->readDatagram(datagram.data(), datagram.size(), &peerAddress, &peerPort);
+        QString str = datagram.data();
+        QString peer = "[From" + peerAddress.toString() + ":" + QString::number(peerPort) + "] ";
+        this->ui->plainTextEdit->appendPlainText(peer + str);
+    }
+}
+
 void MainWindow::on_actStartListening_triggered()
 {
     //开始监听
@@ -349,4 +390,54 @@ void MainWindow::on_btnSendClient_clicked()
     QByteArray str = msg.toUtf8();
     str.append("\n");
     tcpClient->write(str);
+}
+
+void MainWindow::on_actBind_triggered()
+{
+    //绑定端口
+    quint16 port = this->ui->spinBindPort->value();//本机UDP端口
+    if(udpSocket->bind(port)){
+        //绑定端口成功
+        this->ui->plainTextEdit->appendPlainText("**已成功绑定");
+        this->ui->plainTextEdit->appendPlainText("**绑定端口:" + QString::number(udpSocket->localPort()));
+        this->ui->actBind->setEnabled(false);
+        this->ui->actStop->setEnabled(true);
+    }else{
+        this->ui->plainTextEdit->appendPlainText("**绑定失败");
+    }
+}
+
+
+void MainWindow::on_actStop_triggered()
+{
+    //解除绑定
+    udpSocket->abort();
+    this->ui->actBind->setEnabled(true);
+    this->ui->actStop->setEnabled(false);
+    this->ui->plainTextEdit->appendPlainText("**已解除绑定");
+}
+
+void MainWindow::on_btnSendUDP_clicked()
+{
+    QString targetIP = this->ui->comboIPUDP->currentText();//目标IP
+    QHostAddress targetAddr(targetIP);
+    quint16 targetPort = this->ui->spinTargetPort->value();
+    QString msg = this->ui->editMsgUDP->text();//发送的消息内容
+    QByteArray str = msg.toUtf8();
+    udpSocket->writeDatagram(str, targetAddr, targetPort);//发出数据报
+    this->ui->plainTextEdit->appendPlainText("[out] " + msg);
+    this->ui->editMsgUDP->clear();
+    this->ui->editMsgUDP->setFocus();
+}
+
+void MainWindow::on_btnBroadcastUDP_clicked()
+{
+    //255.255.255.255
+    quint16 targetPort = this->ui->spinTargetPort->value();
+    QString msg = this->ui->editMsgUDP->text();//发送的消息内容
+    QByteArray str = msg.toUtf8();
+    udpSocket->writeDatagram(str, QHostAddress::Broadcast, targetPort);//发出数据报
+    this->ui->plainTextEdit->appendPlainText("[broadcast] " + msg);
+    this->ui->editMsgUDP->clear();
+    this->ui->editMsgUDP->setFocus();
 }

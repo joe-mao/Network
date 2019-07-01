@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1321</width>
-    <height>655</height>
+    <height>798</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -308,6 +308,130 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>1301</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>UDP</string>
+    </property>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>51</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>绑定端口</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBindPort">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>30</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>999999</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboIPUDP">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>30</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目 标 地 址:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinTargetPort">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>30</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>999999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>30</y>
+       <width>51</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标端口</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnSendUDP">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>90</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发送消息</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="editMsgUDP">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>451</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnBroadcastUDP">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>90</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>广播消息</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -331,9 +455,15 @@
    </attribute>
    <addaction name="actStartListening"/>
    <addaction name="actStopListening"/>
+   <addaction name="separator"/>
    <addaction name="actClearPlainText"/>
+   <addaction name="separator"/>
    <addaction name="actConnectToServer"/>
    <addaction name="actDisconnectFromServer"/>
+   <addaction name="separator"/>
+   <addaction name="actBind"/>
+   <addaction name="actStop"/>
+   <addaction name="separator"/>
    <addaction name="actExit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -407,6 +537,30 @@
    </property>
    <property name="toolTip">
     <string>从服务器断开连接</string>
+   </property>
+  </action>
+  <action name="actBind">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/actBind.PNG</normaloff>:/image/connect/actBind.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>绑定端口</string>
+   </property>
+   <property name="toolTip">
+    <string>UDP绑定端口</string>
+   </property>
+  </action>
+  <action name="actStop">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/connect/actStop.PNG</normaloff>:/image/connect/actStop.PNG</iconset>
+   </property>
+   <property name="text">
+    <string>解除绑定</string>
+   </property>
+   <property name="toolTip">
+    <string>UDP解除端口绑定</string>
    </property>
   </action>
  </widget>

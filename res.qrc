@@ -6,5 +6,7 @@
         <file>connect/disconnect.PNG</file>
         <file>connect/startListening.PNG</file>
         <file>connect/stopListening.PNG</file>
+        <file>connect/actBind.PNG</file>
+        <file>connect/actStop.PNG</file>
     </qresource>
 </RCC>

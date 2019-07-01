@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QTcpServer>
 #include <QTcpSocket>
-
+#include <QUdpSocket>
 
 namespace Ui {
 class MainWindow;
@@ -52,7 +52,8 @@ private slots:
     void onSocketStateChangeClient(QAbstractSocket::SocketState socketState);
     void onSocketReadyReadClient();//读取socket传入的数据
 
-
+    void onSocketStateChangeUdp(QAbstractSocket::SocketState socketState);
+    void onSocketReadyReadUdp();
 
 
     void on_actStartListening_triggered();
@@ -67,6 +68,16 @@ private slots:
 
     void on_btnSendClient_clicked();
 
+
+
+    void on_actBind_triggered();
+
+    void on_actStop_triggered();
+
+    void on_btnSendUDP_clicked();
+
+    void on_btnBroadcastUDP_clicked();
+
 protected:
 //    void closeEvent(QCloseEvent * event);
 
@@ -79,6 +90,15 @@ private:
     QTcpServer * tcpServer;//Tcp服务器
     QTcpSocket * tcpClient;
     QTcpSocket * tcpSocket;//Tcp通信的Socket
+
+    QLabel * LabSocketStateUDP;
+    QUdpSocket * udpSocket;
+
+
+
+
+
+
     QString getLocalIP();//获取本机IP地址
 
 
